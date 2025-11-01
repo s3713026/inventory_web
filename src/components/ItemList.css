@@ -1,0 +1,72 @@
+.item-list {
+    margin-top: 16px;
+  }
+  
+  .refresh-btn {
+    background: #414040;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+  }
+  
+  .item-info {
+    flex: 1;
+  }
+  
+  .item-name {
+    font-weight: bold;
+    display: block;
+  }
+  
+  .qty-label {
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .item-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .qty-input {
+    width: 40px;
+    height: 28px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .btn-plus {
+    color: green;
+    font-size: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .btn-minus {
+    color: red;
+    font-size: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .input-inline {
+    width: 80px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px;
+  }
+  

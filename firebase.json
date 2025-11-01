@@ -1,0 +1,39 @@
+{
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/gas/**",
+        "destination": "https://script.google.com/macros/s/AKfycbxLJBkKSW9Ynz_LDh2yneXkVaXpQZUSWeCt0doffFzA1doBe9DHP3ZLqnmDQCCCjPkK/exec"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(js|css|html|json)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET, POST, OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type"
+          }
+        ]
+      }
+    ]
+  }
+}

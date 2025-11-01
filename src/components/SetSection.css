@@ -1,0 +1,112 @@
+.set-box {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #eaf6ff;
+    border-radius: 8px;
+  }
+  
+  .set-box h3 {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .set-box label {
+    font-weight: bold;
+    display: block;
+    margin-top: 8px;
+  }
+  
+  .row {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0;
+    flex-wrap: wrap;
+  }
+  
+  .choice {
+    border: 1px solid #888;
+    border-radius: 6px;
+    padding: 8px 12px;
+    background: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .choice:hover {
+    background: #f0f8ff;
+  }
+  
+  .choice.selected {
+    background-color: #cce5ff;
+    border-color: #007bff;
+    color:#020202;
+  }
+  
+  input {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 6px;
+    margin: 4px 0;
+  }
+  
+  button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: rgb(9, 9, 9);
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  button:not(:disabled):hover {
+    background-color: #0056b3;
+    color:#eaf6ff;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+  
+  .radio-item {
+    width: 48%; 
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .radio-item input[type="radio"] {
+    flex-shrink: 0; /* không cho radio co lại */
+    width: 18px;
+    height: 18px;
+  }
+  
+  .radio-item label {
+    flex: 1; /* label chiếm hết phần còn lại */
+    white-space: nowrap; /* giữ text trên 1 dòng, nếu bạn muốn xuống dòng thì bỏ dòng này */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Responsive: khi màn hình nhỏ (điện thoại) thì 1 cột */
+  @media (max-width: 600px) {
+    .radio-item {
+      width: 100%;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  

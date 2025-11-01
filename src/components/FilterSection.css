@@ -1,0 +1,22 @@
+.filter-box {
+    margin-top: 12px;
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 8px;
+  }
+  
+  .filter-box input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .checkbox-row {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    gap: 6px;
+  }
+  

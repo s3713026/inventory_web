@@ -1,0 +1,76 @@
+.filter-box {
+    margin-top: 12px;
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 8px;
+  }
+  
+  .filter-box input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  .checkbox-row {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    gap: 6px;
+  }
+  
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .box {
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 16px;
+  }
+  
+  .row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  
+  input, select, button {
+    margin: 4px 0;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border-bottom: 1px solid #eee;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background: #f0f0f0;
+  }
+
+
+  
