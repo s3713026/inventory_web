@@ -31,7 +31,7 @@ export default function Home() {
   const [showFilter, setShowFilter] = useState(false);
 
   const [setSize, setSetSize] = useState(3);
-  const [toolType, setToolType] = useState("kim đan");
+  const [toolType, setToolType] = useState("kim móc ");
   const [colorSku, setColorSku] = useState("");
   const [setQtyInput, setSetQtyInput] = useState("1");
 
@@ -57,45 +57,81 @@ export default function Home() {
   };
 
   const updateQty = async (sku, delta) => {
-    const payload = { action: "updateQty", sku, delta };
-    await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: { "Content-Type": "application/json" },
-    });
-    await loadItems();
+    try {
+      const params = new URLSearchParams({
+        action: "updateQty",
+        sku,
+        delta,
+      });
+      const res = await fetch(`${GOOGLE_SHEETS_WEBAPP_URL}?${params.toString()}`);
+      const data = await res.json();
+      console.log("UpdateQty response:", data);
+      await loadItems();
+    } catch (err) {
+      console.error("❌ updateQty failed:", err);
+    }
   };
-
+  
   const setExactQty = async (sku, qty) => {
-    const payload = { action: "setQty", sku, qty };
-    await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: { "Content-Type": "application/json" },
-    });
-    await loadItems();
+    try {
+      const params = new URLSearchParams({
+        action: "setQty",
+        sku,
+        qty,
+      });
+      const res = await fetch(`${GOOGLE_SHEETS_WEBAPP_URL}?${params.toString()}`);
+      const data = await res.json();
+      console.log("SetExactQty response:", data);
+      await loadItems();
+    } catch (err) {
+      console.error("❌ setExactQty failed:", err);
+    }
   };
 
   const addItem = async () => {
     if (!sku || !qty) return alert("⚠️ Thiếu thông tin SKU hoặc số lượng");
+  
+    // Tạo query string từ object payload
     const payload = { action: "add", sku, name, type, qty: parseInt(qty), image };
-    await fetch(GOOGLE_SHEETS_WEBAPP_URL, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: { "Content-Type": "application/json" },
-    });
-    await loadItems();
-    setSku("");
-    setName("");
-    setQty("");
-    setType("");
-    setImage(null);
+    const params = new URLSearchParams(payload);
+  
+    try {
+      // Gọi fetch với GET và query params
+      const res = await fetch(`${GOOGLE_SHEETS_WEBAPP_URL}?${params.toString()}`);
+      const data = await res.json();
+      console.log("Add response:", data);
+  
+      // Reload dữ liệu
+      await loadItems();
+  
+      // Reset form
+      setSku("");
+      setName("");
+      setQty("");
+      setType("");
+      setImage(null);
+    } catch (err) {
+      console.error(err);
+      alert("❌ Thêm sản phẩm thất bại");
+    }
   };
+  
 
   const createSet = async () => {
     const n = parseInt(setQtyInput);
     const yarnQty = setSize * n;
-    const toolSku = toolType === "kim đan" ? "KD3560" : "KMD6";
+    let toolSku = "";
+    if (toolType === "kim móc") {
+      toolSku = "KMD60";
+    } else if (toolType === "Kim đan 25cm 5.5mm") {
+      toolSku = "KD2555";
+    } else if (toolType === "Kim đan 25cm 6.0mm") {
+      toolSku = "KD2560";
+    } else if (toolType === "Kim đan 35cm 5.5mm") {
+      toolSku = "KD3555";
+    } else if (toolType === "Kim đan 35cm 6.0mm") {
+      toolSku = "KD3560";
+    }
     await updateQty(colorSku, -yarnQty);
     await updateQty(toolSku, -n);
     await updateQty("TDH", -n);
@@ -107,7 +143,18 @@ export default function Home() {
   const restockSet = async () => {
     const n = parseInt(setQtyInput);
     const yarnQty = setSize * n;
-    const toolSku = toolType === "kim đan" ? "KD3560" : "KMD6";
+    let toolSku = "";
+    if (toolType === "kim móc") {
+      toolSku = "KMD60";
+    } else if (toolType === "Kim đan 25cm 5.5mm") {
+      toolSku = "KD2555";
+    } else if (toolType === "Kim đan 25cm 6.0mm") {
+      toolSku = "KD2560";
+    } else if (toolType === "Kim đan 35cm 5.5mm") {
+      toolSku = "KD3555";
+    } else if (toolType === "Kim đan 35cm 6.0mm") {
+      toolSku = "KD3560";
+    }
     await updateQty(colorSku, yarnQty);
     await updateQty(toolSku, n);
     await updateQty("TDH", n);
@@ -117,8 +164,13 @@ export default function Home() {
   };
 
   const filteredItems = items.filter((i) => {
-    const nameOk = filterName ? i.name?.toLowerCase().includes(filterName.toLowerCase()) : true;
-    const typeOk = filterType ? i.type?.toLowerCase().includes(filterType.toLowerCase()) : true;
+    const nameOk = filterName
+    ? typeof i.name === "string" && i.name.toLowerCase().includes(filterName.toLowerCase())
+    : true;
+
+  const typeOk = filterType
+    ? typeof i.type === "string" && i.type.toLowerCase().includes(filterType.toLowerCase())
+    : true;
     const qtyOk = filterQty ? i.qty <= parseInt(filterQty) : true;
     const zeroOk = filterZero ? i.qty === 0 : true;
     return nameOk && typeOk && qtyOk && zeroOk;
@@ -153,7 +205,7 @@ export default function Home() {
           setType={setType}
           setQty={setQty}
           pickImage={pickImage}
-          addItem={addItem}
+          onAdd={addItem}
           loadItems={loadItems}
         />
       )}
@@ -198,5 +250,3 @@ export default function Home() {
     </div>
   );
 }
-
-
