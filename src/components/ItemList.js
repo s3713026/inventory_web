@@ -19,6 +19,37 @@ export default function ItemList({ items, loading, onRefresh, updateQty, setExac
       ) : (
         items.map((item) => (
           <div key={item.sku} className="item-row">
+            <div className="item-actions">
+              <button
+                className="btn-plus"
+                onClick={() =>
+                  updateQty(item.sku, parseInt(qtyInputs[item.sku] || "1"))
+                }
+              >
+                ＋
+              </button>
+
+              <input
+                type="number"
+                className="qty-input"
+                value={qtyInputs[item.sku] || ""}
+                placeholder="1"
+                onChange={(e) =>
+                  setQtyInputs((prev) => ({ ...prev, [item.sku]: e.target.value }))
+                }
+              />
+
+              <button
+                className="btn-minus"
+                onClick={() =>
+                  updateQty(item.sku, -parseInt(qtyInputs[item.sku] || "1"))
+                }
+              >
+                －
+              </button>
+            </div>
+
+            
             <div className="item-info">
               <strong className="item-name">{item.name}</strong>
               <div>SKU: {item.sku}</div>
@@ -49,35 +80,6 @@ export default function ItemList({ items, loading, onRefresh, updateQty, setExac
               )}
             </div>
 
-            <div className="item-actions">
-              <button
-                className="btn-plus"
-                onClick={() =>
-                  updateQty(item.sku, parseInt(qtyInputs[item.sku] || "1"))
-                }
-              >
-                ＋
-              </button>
-
-              <input
-                type="number"
-                className="qty-input"
-                value={qtyInputs[item.sku] || ""}
-                placeholder="1"
-                onChange={(e) =>
-                  setQtyInputs((prev) => ({ ...prev, [item.sku]: e.target.value }))
-                }
-              />
-
-              <button
-                className="btn-minus"
-                onClick={() =>
-                  updateQty(item.sku, -parseInt(qtyInputs[item.sku] || "1"))
-                }
-              >
-                －
-              </button>
-            </div>
           </div>
         ))
       )}
